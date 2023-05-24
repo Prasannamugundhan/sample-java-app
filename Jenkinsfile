@@ -22,5 +22,19 @@ pipeline{
 
 
 
+
+        stage('GitCheckout'){
+
+            steps{
+
+                script{
+                    Mvntest()
+                }
+            }
+        }
+
+
+
+
     }
 }
