@@ -20,10 +20,7 @@ pipeline{
             }
         }
 
-
-
-
-        stage('GitCheckout'){
+        stage('mvntest'){
 
             steps{
 
@@ -32,9 +29,6 @@ pipeline{
                 }
             }
         }
-
-
-
 
     }
 }
