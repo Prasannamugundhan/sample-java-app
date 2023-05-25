@@ -30,5 +30,15 @@ pipeline{
             }
         }
 
+        stage('mvnbuild'){
+
+            steps{
+
+                script{
+                    Mvnbuild()
+                }
+            }
+        }
+
     }
 }
