@@ -52,21 +52,21 @@ pipeline{
         sh 'docker build -t dockerrr007/jenkins-docker-hub .'
       }
     }
+
+
     stage('Login') {
       steps {
         sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
       }
     }
+
+
     stage('Push') {
       steps {
         sh 'docker push dockerrr007/jenkins-docker-hub'
       }
     }
   
-  post {
-    always {
-      sh 'docker logout'
+
     }
-  }
-}
 }
