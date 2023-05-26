@@ -49,7 +49,7 @@ pipeline{
   
     stage('Build') {
       steps {
-        sh 'docker build -t dockerrr007/jenkins-docker-hub .'
+        sh 'docker build -t jenshard/latest .'
       }
     }
 
