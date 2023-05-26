@@ -49,21 +49,26 @@ pipeline{
   
     stage('Build') {
       steps {
-        sh 'docker build -t jenshard/latest .'
-      }
-    }
+          script{
+            Dockerbuild()
+          }
+        }
 
 
     stage('Login') {
       steps {
-        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+          script{
+            Dockerlogin()
+          }
       }
     }
 
 
     stage('Push') {
       steps {
-        sh 'docker push dockerrr007/jenkins-docker-hub'
+          scripts{
+            Dockerpush()
+          }
       }
     }
   
