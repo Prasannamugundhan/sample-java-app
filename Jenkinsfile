@@ -5,7 +5,7 @@ pipeline{
     agent any
 
     environment {
-    DOCKERHUB_CREDENTIALS = credentials('docker_cred')
+    DOCKERHUB_CREDENTIALS = credentials('Jenkins')
   }
 
     stages{
@@ -44,35 +44,28 @@ pipeline{
             }
         }
 
-        stage('dockerbuild'){
-
-            steps{
-
-                script{
-                    Dockerbuild()
-                }
-            }
-        }
-
-        stage('dockerlogin'){
-
-            steps{
-
-                script{
-                    Dockerlogin()
-                }
-            }
-        }
-
-        stage('dockerpush'){
-
-            steps{
-
-                script{
-                    Dockerpush()
-                }
-            }
-        }
-
+       
+  
+  
+    stage('Build') {
+      steps {
+        sh 'docker build -t dockerrr007/jenkins-docker-hub .'
+      }
     }
+    stage('Login') {
+      steps {
+        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+      }
+    }
+    stage('Push') {
+      steps {
+        sh 'docker push dockerrr007/jenkins-docker-hub'
+      }
+    }
+  
+  post {
+    always {
+      sh 'docker logout'
+    }
+  }
 }
