@@ -4,6 +4,10 @@ pipeline{
 
     agent any
 
+    environment {
+    DOCKERHUB_CREDENTIALS = credentials('docker_cred')
+  }
+
     stages{
 
         stage('GitCheckout'){
@@ -36,6 +40,36 @@ pipeline{
 
                 script{
                     Mvnbuild()
+                }
+            }
+        }
+
+        stage('dockerbuild'){
+
+            steps{
+
+                script{
+                    Dockerbuild()
+                }
+            }
+        }
+
+        stage('dockerlogin'){
+
+            steps{
+
+                script{
+                    Dockerlogin()
+                }
+            }
+        }
+
+        stage('dockerpush'){
+
+            steps{
+
+                script{
+                    Dockerpush()
                 }
             }
         }
