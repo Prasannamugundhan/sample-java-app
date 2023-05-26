@@ -53,7 +53,7 @@ pipeline{
             Dockerbuild()
           }
         }
-
+    }
 
     stage('Login') {
       steps {
